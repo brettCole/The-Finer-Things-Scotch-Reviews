@@ -5,4 +5,6 @@ if ActiveRecord::Migrator.needs_migration?
 end
 
 use Rack::MethodOverride
+use ConnoisseursController
+use ScotchesController
 run ApplicationController

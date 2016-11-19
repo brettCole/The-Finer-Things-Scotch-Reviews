@@ -10,6 +10,7 @@ class ApplicationController < Sinatra::Base
 	end
 
 	get '/' do 
+		@title = "The Finer Things In Life"
 		erb :'/index'
 	end
 
