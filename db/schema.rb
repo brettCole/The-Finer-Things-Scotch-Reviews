@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 20161117015851) do
   create_table "connoisseors", force: :cascade do |t|
     t.string "username"
     t.string "email"
-    t.string "password"
+    t.string "password_digest"
   end
 
   create_table "scotches", force: :cascade do |t|
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20161117015851) do
     t.integer "rating"
     t.string  "price"
     t.string  "review"
+    t.integer "user_id"
   end
 
 end
