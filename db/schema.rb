@@ -10,9 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161117015851) do
+ActiveRecord::Schema.define(version: 20161119210215) do
 
-  create_table "connoisseors", force: :cascade do |t|
+  create_table "connoisseurs", force: :cascade do |t|
     t.string "username"
     t.string "email"
     t.string "password_digest"

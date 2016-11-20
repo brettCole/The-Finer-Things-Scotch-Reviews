@@ -1,0 +1,7 @@
+<h1>Welcome To Your Reviews- <%= @connoisseur.username %></h1>
+<% @scotch.each do |scotch| %>
+	<p><%= scotch.name %></p>
+<% end %>
+
+<h4><a href="/reviews/new">Write A Review</a></h4>
+<h4><a href="/logout">Log Out</a>

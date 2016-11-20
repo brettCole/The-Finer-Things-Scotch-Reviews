@@ -3,15 +3,12 @@ require './config/environment'
 class ConnoisseursController < ApplicationController
 
 	get '/signup' do 
-		if session[:@connoisseur_id]
+		@title = "Signup"
+		if !!session[:@connoisseur_id]
 			redirect '/reviews'
 		else
 			erb :'/connoisseurs/signup'
 		end
-	end
-
-	get '/login' do 
-		erb :'/connoisseurs/login'
 	end
 
 	post '/signup' do 
@@ -19,19 +16,33 @@ class ConnoisseursController < ApplicationController
 			redirect '/signup'
 		else
 			@connoisseur = Connoisseur.create(params)
-			session[:user_id] = @connoisseur.id
+			session[:id] = @connoisseur.id
 			redirect '/reviews'
 		end
 	end
 
+	get '/login' do 
+		@title = "Login"
+		if logged_in?
+			redirect '/reviews'
+		else
+			erb :'/connoisseurs/login'
+		end
+	end
+
 	post '/login' do 
-		@connoisseur = Connoisseur.find_by(params[:username])
+		@connoisseur = Connoisseur.find_by(username: params[:username])
 		if @connoisseur && @connoisseur.authenticate(params[:password])
-			session[:user_id] = @connoisseur_id
+			session[:id] = @connoisseur.id
 			redirect '/reviews'
 		else
 			redirect '/login'
 		end
 	end	
+
+	get '/logout' do 
+		session.clear
+		redirect '/login'
+	end
 
 end
