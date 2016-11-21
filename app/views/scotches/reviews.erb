@@ -1,7 +1,11 @@
 <h1>Welcome To Your Reviews- <%= @connoisseur.username %></h1>
+<h2><a href="/reviews/new">Write A Review</a></h2>
 <% @scotch.each do |scotch| %>
-	<p><%= scotch.name %></p>
+	<h3>Name of Scotch: <%= scotch.name %></h3> <h3>Scotch Rating: <%= scotch.rating %></h3> <h3>Price of Scotch: $<%= scotch.price %></h3>
+	<h3>Scotch Review: <br>
+	<%= scotch.review %></h3>
+	<hr style="border: dotted 2px;">
 <% end %>
 
-<h4><a href="/reviews/new">Write A Review</a></h4>
-<h4><a href="/logout">Log Out</a>
+
+<h2><a href="/logout">Log Out</a></h2>

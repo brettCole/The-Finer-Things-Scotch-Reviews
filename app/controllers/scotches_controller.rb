@@ -23,9 +23,8 @@ class ScotchesController < ApplicationController
 		end	
 	end
 
-	post '/reviews/new' do 
+	post '/reviews' do 
 		@scotch = Scotch.create(name: params[:name], rating: params[:rating], price: params[:price], review: params[:review], user_id: session[:id])
-		@scotch.save
 		redirect "/reviews"
 	end
 
