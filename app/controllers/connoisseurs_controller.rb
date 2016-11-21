@@ -17,7 +17,7 @@ class ConnoisseursController < ApplicationController
 		else
 			@connoisseur = Connoisseur.create(params)
 			session[:id] = @connoisseur.id
-			redirect '/reviews'
+			redirect "/reviews"
 		end
 	end
 
@@ -44,5 +44,6 @@ class ConnoisseursController < ApplicationController
 		session.clear
 		redirect '/login'
 	end
+
 
 end

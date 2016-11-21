@@ -7,7 +7,7 @@ class ScotchesController < ApplicationController
 		if logged_in?
 			@scotch = Scotch.all.distinct
 			@connoisseur = Connoisseur.find(session[:id])
-			erb :'/scotches/reviews'
+			erb :"scotches/reviews"
 		else
 			redirect '/login'
 		end
@@ -26,6 +26,9 @@ class ScotchesController < ApplicationController
 	post '/reviews' do 
 		@scotch = Scotch.create(name: params[:name], rating: params[:rating], price: params[:price], review: params[:review], user_id: session[:id])
 		redirect "/reviews"
+	end
+
+	get '/reviews/:id/edit' do 
 	end
 
 end

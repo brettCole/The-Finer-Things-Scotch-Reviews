@@ -1,11 +1,9 @@
 <h1>Welcome To Your Reviews- <%= @connoisseur.username %></h1>
-<h2><a href="/reviews/new">Write A Review</a></h2>
+<h3><a href="/reviews/new" style="text-decoration: none;">Write A Review</a></h3>
 <% @scotch.each do |scotch| %>
-	<h3>Name of Scotch: <%= scotch.name %></h3> <h3>Scotch Rating: <%= scotch.rating %></h3> <h3>Price of Scotch: $<%= scotch.price %></h3>
-	<h3>Scotch Review: <br>
-	<%= scotch.review %></h3>
-	<hr style="border: dotted 2px;">
+<!--alternative shorthand is scotch.name.split.map(&:capitalize).join(' ') -->
+	<p><a href="/reviews/<%=@connoisseur.id%>" style="text-decoration: none;"><%= scotch.name.split.map { |i| i.capitalize }.join(' ') %></a></p> 
 <% end %>
 
 
-<h2><a href="/logout">Log Out</a></h2>
+<h3><a href="/logout" style="text-decoration: none;">Log Out</a></h3>

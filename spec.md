@@ -2,10 +2,10 @@
 
 Specs:
 - [x] Use Sinatra to build the app
-- [ ] Use ActiveRecord for storing information in a database
-- [ ] Include more than one model class (list of model class names e.g. User, Post, Category)
-- [ ] Include at least one has_many relationship (x has_many y e.g. User has_many Posts)
-- [ ] Include user accounts
+- [x] Use ActiveRecord for storing information in a database
+- [x] Include more than one model class (list of model class names e.g. User, Post, Category)- Connoisseur, Scotch
+- [x] Include at least one has_many relationship (x has_many y e.g. User has_many Posts)- Connoisseur has_many Scotch
+- [x] Include user accounts- includes login and logout and signup
 - [ ] Ensure that users can't modify content created by other users
 - [ ] Include user input validations
 - [ ] Display validation failures to user with error message (example form URL e.g. /posts/new)
