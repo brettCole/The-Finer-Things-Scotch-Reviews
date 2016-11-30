@@ -1,5 +1,5 @@
 <h1>Edit <%=@scotch.name%></h1>
-<form method="POST" action="/reviews/<%=@scotch.id%>">
+<form method="POST" action="/reviews/<%=@scotch.slug%>">
 	<input type="text" name="name" placeholder="Name of Scotch">
 	<input type="text" name="rating" placeholder="Rate 0-5">
 	<input type="number" name="price" placeholder="Price"><br><br>

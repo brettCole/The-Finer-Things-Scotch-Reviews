@@ -29,9 +29,10 @@ class ScotchesController < ApplicationController
 		redirect "/reviews"
 	end
 
-	get "/reviews/:id" do 
+
+	get "/reviews/:slug" do 
 		@title = "Review"	#Tab Title for Page
-		@scotch = Scotch.find_by_id(params[:id])
+		@scotch = Scotch.find_by_slug(params[:slug])
 		#binding.pry
 		if logged_in?
 			erb :"/scotches/show_review"
@@ -40,9 +41,9 @@ class ScotchesController < ApplicationController
 		end
 	end
 
-	get "/reviews/:id/edit" do
+	get "/reviews/:slug/edit" do
 		@title = "Edit Review"	#Tab Title for Page
-		@scotch = Scotch.find_by_id(params[:id])
+		@scotch = Scotch.find_by_slug(params[:slug])
 		if logged_in?
 			#binding.pry
 			#@scotch = Scotch.find_by_id(params[:id])
