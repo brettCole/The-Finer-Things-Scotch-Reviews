@@ -1,4 +1,5 @@
 require './config/environment'
+require 'pry'
 
 class ScotchesController < ApplicationController
 
@@ -7,7 +8,7 @@ class ScotchesController < ApplicationController
 		if logged_in?
 			@scotch = Scotch.all.distinct
 			@connoisseur = Connoisseur.find(session[:id])
-			erb :"scotches/reviews"
+			erb :"/scotches/reviews"
 		else
 			redirect '/login'
 		end
@@ -24,12 +25,14 @@ class ScotchesController < ApplicationController
 	end
 
 	post '/reviews' do 
-		@scotch = Scotch.create(name: params[:name], rating: params[:rating], price: params[:price], review: params[:review], user_id: session[:id])
+		@scotch = Scotch.create(name: params[:name], rating: params[:rating], price: params[:price], review: params[:review], connoisseurs_id: session[:id])
 		redirect "/reviews"
 	end
 
 	get "/reviews/:id" do 
-			@scotch = Scotch.find_by_id(params[:id])
+		@title = "Review"	#Tab Title for Page
+		@scotch = Scotch.find_by_id(params[:id])
+		#binding.pry
 		if logged_in?
 			erb :"/scotches/show_review"
 		else
@@ -37,7 +40,24 @@ class ScotchesController < ApplicationController
 		end
 	end
 
-	get '/reviews/:id/edit' do 
+	get "/reviews/:id/edit" do
+		@title = "Edit Review"	#Tab Title for Page
+		@scotch = Scotch.find_by_id(params[:id])
+		if logged_in?
+			#binding.pry
+			#@scotch = Scotch.find_by_id(params[:id])
+			if @scotch.connoisseurs_id == session[:id]
+				erb :"/scotches/edit_review"
+			else
+				redirect "/reviews"
+			end
+		else
+			"/login"
+		end
 	end
 
 end
+
+
+
+

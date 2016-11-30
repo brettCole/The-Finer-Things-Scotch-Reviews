@@ -4,8 +4,8 @@ class CreateScotches < ActiveRecord::Migration[5.0]
   		t.string :name
   		t.integer :rating
   		t.string :price
-  		t.string :review
-  		t.integer :user_id
+  		t.text :review
+  		t.integer :connoisseurs_id
   	end
   end
 end

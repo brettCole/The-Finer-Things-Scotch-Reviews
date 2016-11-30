@@ -22,8 +22,8 @@ ActiveRecord::Schema.define(version: 20161119210215) do
     t.string  "name"
     t.integer "rating"
     t.string  "price"
-    t.string  "review"
-    t.integer "user_id"
+    t.text    "review"
+    t.integer "connoisseurs_id"
   end
 
 end

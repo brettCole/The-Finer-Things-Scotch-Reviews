@@ -12,7 +12,7 @@ class ConnoisseursController < ApplicationController
 	end
 
 	post '/signup' do 
-		if params.any? { |key, value| value.empty? }	
+		if params.any? { |key, value| value.empty? }
 			redirect "/signup"
 		else
 			@connoisseur = Connoisseur.create(params)	#params= id, username, email, and password
@@ -26,7 +26,7 @@ class ConnoisseursController < ApplicationController
 		if !!session[:id]	#or if logged_in?- checks to see if there is a session[:id]
 			redirect "/reviews"
 		else
-			erb :"connoisseurs/login"
+			erb :"/connoisseurs/login"
 		end
 	end
 
@@ -34,22 +34,15 @@ class ConnoisseursController < ApplicationController
 		@connoisseur = Connoisseur.find_by(username: params[:username])
 		if @connoisseur && @connoisseur.authenticate(params[:password])
 			session[:id] = @connoisseur.id
-			redirect '/reviews'
+			redirect'/reviews'
 		else
 			redirect '/login'
 		end
 	end	
 
 	get '/logout' do 
-		session.clear
+		session.clear	#clears session[:id]
 		redirect '/login'
 	end
-
-	get '/connoisseurs/:slug' do 
-		"hello world"
-		@connoisseur = current_user
-		erb :"/scotches/show_review"
-	end
-
 
 end

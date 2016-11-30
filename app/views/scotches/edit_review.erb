@@ -1,1 +1,9 @@
-<h1>Edit Your Review</h1>
+<h1>Edit <%=@scotch.name%></h1>
+<form method="POST" action="/reviews/<%=@scotch.id%>">
+	<input type="text" name="name" placeholder="Name of Scotch">
+	<input type="text" name="rating" placeholder="Rate 0-5">
+	<input type="number" name="price" placeholder="Price"><br><br>
+	<textarea rows="15" cols="50" name="review" placeholder="Review"></textarea><br><br>
+	<input type="submit" value="Post Review">
+</form>
+<h4><a href="/reviews">Go Back To Reviews</a></h4>
