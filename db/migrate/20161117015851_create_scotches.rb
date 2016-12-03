@@ -2,7 +2,7 @@ class CreateScotches < ActiveRecord::Migration[5.0]
   def change
   	create_table :scotches do |t|
   		t.string :name
-  		t.integer :rating
+  		t.string :rating
   		t.string :price
   		t.text :review
   		t.integer :connoisseurs_id

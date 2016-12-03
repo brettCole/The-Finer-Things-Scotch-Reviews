@@ -1,6 +1,12 @@
 <h1>Name: <%=@scotch.name%></h1>
 <h3>Rating: <%=@scotch.rating%></h3>
-<h3>Price: <%=@scotch.price%></h3>
+<h3>Price: $<%=@scotch.price%></h3>
 <h3>Review: <%=@scotch.review%></h3>
 
+<form method="POST" action="/reviews/<%=@scotch.slug%>/delete">
+	<input type="hidden" name="_method" value="DELETE">
+	<input type="submit" value="Delete Review">
+</form><br>
+
 <a href="/reviews/<%=@scotch.slug%>/edit">Edit Review</a>
+<h4><a href="/reviews">Go Back To Reviews</a></h4>

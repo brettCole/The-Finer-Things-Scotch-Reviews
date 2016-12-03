@@ -15,7 +15,7 @@ class ConnoisseursController < ApplicationController
 		if params.any? { |key, value| value.empty? }
 			redirect "/signup"
 		else
-			@connoisseur = Connoisseur.create(params)	#params= id, username, email, and password
+			@connoisseur = Connoisseur.create(params)	#params = username, email, and password
 			session[:id] = @connoisseur.id	#need to use session[:id] not session[:user_id] so that sign-in is automatic
 			redirect "/reviews"
 		end
@@ -31,8 +31,9 @@ class ConnoisseursController < ApplicationController
 	end
 
 	post '/login' do 
-		@connoisseur = Connoisseur.find_by(username: params[:username])
-		if @connoisseur && @connoisseur.authenticate(params[:password])
+		@connoisseur = Connoisseur.find_by(username: params[:username])	#assigns username as a @connoisseur variable value
+		if @connoisseur && @connoisseur.authenticate(params[:password])	#takes that username value and authenticates the corresponding password value
+			#session[:id] = @connoisseur.user_id							#to make sure it matches to username
 			session[:id] = @connoisseur.id
 			redirect'/reviews'
 		else

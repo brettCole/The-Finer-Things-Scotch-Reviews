@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 20161119210215) do
 
   create_table "scotches", force: :cascade do |t|
     t.string  "name"
-    t.integer "rating"
+    t.string  "rating"
     t.string  "price"
     t.text    "review"
     t.integer "connoisseurs_id"
