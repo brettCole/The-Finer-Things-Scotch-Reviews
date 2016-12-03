@@ -27,7 +27,9 @@ class ScotchesController < ApplicationController
 	end
 
 	post '/reviews' do 
-		@scotch = Scotch.create(name: params[:name], rating: params[:rating], price: params[:price], review: params[:review], connoisseurs_id: session[:id])
+		@scotch = Scotch.create(name: params[:name], 
+			rating: params[:rating], price: params[:price], 
+			review: params[:review], connoisseurs_id: session[:id])
 		redirect "/reviews"
 	end
 
@@ -79,10 +81,6 @@ class ScotchesController < ApplicationController
 				erb :"/scotches/edit_review"	
 
 			elsif @scotch.connoisseurs_id == session[:id]
-				#@scotch = Scotch.create(name: params[:name], 
-				#	rating: params[:rating], price: params[:price], 
-				#	review: params[:review], connoisseurs_id: session[:id])
-				#redirect "/reviews"
 				@scotch.name = params[:name]
 				@scotch.rating = params[:rating]
 				@scotch.price = params[:price]
