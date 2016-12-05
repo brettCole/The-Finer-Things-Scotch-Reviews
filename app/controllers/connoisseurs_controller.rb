@@ -14,29 +14,15 @@ class ConnoisseursController < ApplicationController
 	end
 
 	post '/signup' do
-		#if params.any? { |key, value| value.empty? }
-		#if params[:username] == "" || params[:email] == "" || params[:password] == ""
-		#if !params[:username].valid? || !params[:email].valid? || !params[:password].valid?
-		#	flash.now[:error] = "Must fill in all fields!"
-		#	redirect "/signup"
-		#else
-		#	@connoisseur = Connoisseur.new(params)	#params = username, email, and password
-		#	@connoisseur.save
-		#	session[:id] = @connoisseur.id	#need to use session[:id] not session[:user_id] so that sign-in is automatic
-		#	redirect "/reviews"
-		#end
 		@connoisseur = Connoisseur.new(:username => params[:username], :email => params[:email], :password => params[:password])
-				if @connoisseur.valid?
-					@connoisseur.save
-					session[:id] = @connoisseur.id
-					redirect "/reviews"
-				elsif !@connoisseur.present?
-					flash[:error] = "Must fill in all fields!"
-					redirect '/signup'
-				else
-					flash[:error] = "Already a connoisseur! Please log in!"
-					redirect '/signup'
-				end
+			if @connoisseur.valid?	#checks validations in model
+				@connoisseur.save	#must use save with Connoisseur.new / Connoisseur.create doesn't need save
+				session[:id] = @connoisseur.id
+				redirect "/reviews"
+			else
+				flash[:error] = "Already a connoisseur! Please log in!"
+				redirect "/signup"
+			end
 	end
 
 	get '/login' do
@@ -51,7 +37,7 @@ class ConnoisseursController < ApplicationController
 	post '/login' do
 		@connoisseur = Connoisseur.find_by(username: params[:username])	#assigns username as a @connoisseur variable value
 		if @connoisseur && @connoisseur.authenticate(params[:password])	#takes that username value and authenticates the corresponding password value
-			#session[:id] = @connoisseur.user_id							#to make sure it matches to username
+			#session[:id] = @connoisseur.user_id													#to make sure it matches to username
 			session[:id] = @connoisseur.id
 			redirect'/reviews'
 		else

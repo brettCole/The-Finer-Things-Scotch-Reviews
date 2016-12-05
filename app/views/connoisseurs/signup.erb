@@ -2,13 +2,10 @@
 <% if flash.has?(:error) %>
 	<h3 style="color: red;"><%= flash[:error] %></h3>
 <%end%>
-<% if flash.has?(:message) %>
-	<h3 style="color: red;"><%= flash[:message] %></h3>
-<%end%>
 <form method="POST" action="/signup">
-	<input type="text" name="username" placeholder="Username">
-	<input type="text" name="email" placeholder="Email">
-	<input type="text" name="password" placeholder="Password">
+	<input type="text" name="username" placeholder="Username" required>
+	<input type="text" name="email" placeholder="Email" required>
+	<input type="text" name="password" placeholder="Password" required>
 	<input type="submit" value="Signup">
 </form>
 <h4><a href="/login">Login</a></h4>
