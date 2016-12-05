@@ -1,10 +1,7 @@
 class Scotch < ActiveRecord::Base
 	belongs_to :connoisseur
-	validates_presence_of :name
-	validates_presence_of :rating
-	validates_presence_of :price
-	validates_presence_of :review
-
+	validates_presence_of :name, :rating, :price, :review
+	
 	def slug
 		name.downcase.gsub(" ","-")
 	end

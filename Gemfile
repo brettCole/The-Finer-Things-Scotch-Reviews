@@ -10,7 +10,6 @@ gem 'require_all'
 gem 'shotgun'
 gem 'sqlite3'
 gem 'thin'
-gem 'tux'
 gem 'bcrypt-ruby'
 gem 'rack-flash3'
 
@@ -23,6 +22,5 @@ end
 group :development do
 	gem 'shotgun'
 	gem 'pry'
-	gem 'tux'
 	gem 'sqlite3'
 end
