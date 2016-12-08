@@ -4,7 +4,7 @@ The Finer Things is a place to post your reviews of the scotches you've shared o
 ##Install Instructions
 To use clone this repository to your computer and then run following commands:
 ```
-bundle Install
+bundle install
 rake db:migrate
 shotgun
 ```
