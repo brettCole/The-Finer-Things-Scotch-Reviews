@@ -25,13 +25,22 @@ class ScotchesController < ApplicationController
 		end
 	end
 
+	#post '/reviews' do
+	#	@scotch = Scotch.create(name: params[:name],
+	#		rating: params[:rating], price: params[:price],
+	#		review: params[:review], connoisseurs_id: session[:id])
+	#	redirect "/reviews"
+	#end
 	post '/reviews' do
-		@scotch = Scotch.create(name: params[:name],
-			rating: params[:rating], price: params[:price],
-			review: params[:review], connoisseurs_id: session[:id])
-		redirect "/reviews"
+		@scotch = Scotch.new(name: params[:name], rating: params[:rating], price: params[:price], review: params[:review], connoisseurs_id: session[:id])
+		if !@scotch.valid?
+			flash[:error] = "Must fill in all fields to complete review!"
+			redirect '/reviews/new'
+		else
+			@scotch.save
+			redirect "/reviews"
+		end
 	end
-
 
 	get "/reviews/:slug" do
 		@title = "Review"	#Tab Title for Page

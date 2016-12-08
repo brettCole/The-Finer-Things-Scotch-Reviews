@@ -1,6 +1,6 @@
 <h1>Welcome <%= @connoisseur.username %></h1>
-<%if flash.has?(:message)%>
-	<%= flash[:message] %>
+<%if flash.has?(:error)%>
+	<h3 style="color: red;"><%= flash[:error] %></h3>
 <%end%>
 <h3>Create A New Review</h3>
 <form method="POST" action="/reviews">
