@@ -25,12 +25,6 @@ class ScotchesController < ApplicationController
 		end
 	end
 
-	#post '/reviews' do
-	#	@scotch = Scotch.create(name: params[:name],
-	#		rating: params[:rating], price: params[:price],
-	#		review: params[:review], connoisseurs_id: session[:id])
-	#	redirect "/reviews"
-	#end
 	post '/reviews' do
 		@scotch = Scotch.new(name: params[:name], rating: params[:rating], price: params[:price], review: params[:review], connoisseurs_id: session[:id])
 		if !@scotch.valid?
