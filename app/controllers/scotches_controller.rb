@@ -45,7 +45,7 @@ class ScotchesController < ApplicationController
 	get "/reviews/:slug" do
 		@title = "Review"	#Tab Title for Page
 		@scotch = Scotch.find_by_slug(params[:slug])
-		@connoisseur = Connoisseur.find_by(params[:id])
+		@connoisseur = Connoisseur.find(session[:id])
 		if logged_in?
 			erb :"/scotches/show_review"
 		else

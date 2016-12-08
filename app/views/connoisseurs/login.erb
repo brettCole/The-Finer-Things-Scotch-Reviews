@@ -1,4 +1,7 @@
 <h1>Login To Post Or View Reviews</h1>
+<%if flash.has?(:error)%>
+	<h3 style= "color: red;"><%= flash[:error] %></h3>
+<%end%>
 <form method="POST" action="/login">
 	<input type="text" name="username" placeholder="Username" required>
 	<input type="text" name="password" placeholder="password" required>

@@ -41,6 +41,7 @@ class ConnoisseursController < ApplicationController
 			session[:id] = @connoisseur.id
 			redirect'/reviews'
 		else
+			flash[:error] = "Username or Password Do Not Match!"
 			redirect '/login'
 		end
 	end
