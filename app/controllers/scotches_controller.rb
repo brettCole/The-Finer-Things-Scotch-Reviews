@@ -26,26 +26,42 @@ class ScotchesController < ApplicationController
 	end
 
 	post '/reviews' do
-		@scotch = Scotch.new(name: params[:name], rating: params[:rating], price: params[:price], review: params[:review], connoisseurs_id: session[:id])
+		@scotch = Scotch.new(params)
 		if !@scotch.valid?
 			flash[:error] = "Must fill in all fields to complete review!"
 			redirect '/reviews/new'
 		else
 			@scotch.save
-			redirect "/reviews"
+			redirect "/scotches/reviews"
 		end
 	end
 
 	get "/reviews/:slug" do
 		@title = "Review"	#Tab Title for Page
 		@scotch = Scotch.find_by_slug(params[:slug])
-		@connoisseur = Connoisseur.find(session[:id])
+		#@connoisseur = Connoisseur.find(session[:id])
+		#Testing
+		@review = Review.all
 		if logged_in?
 			erb :"/scotches/show_review"
 		else
 			redirect "/login"
 		end
 	end
+
+	#Testing post
+	post "/reviews/:slug" do
+		@review = Review.new(params)
+		if !@review.valid?
+			flash[:error] = "Must fill in all fields to complete review!"
+			erb :"/reviews/<%=@scotch.slug%>"
+		else
+			@review.save
+			erb :"/reviews/<%=@scotch.slug%>"
+		end
+		#save review and redirect to show with reviews and also create message for invalid entry
+	end
+	#Testing Above
 
 	get "/reviews/:slug/edit" do
 		@title = "Edit Review"	#Tab Title for Page

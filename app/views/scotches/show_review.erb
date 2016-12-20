@@ -1,13 +1,22 @@
-<h1><%=@connoisseur.username%>'s review of:</h1>
-<h3>Name: <%=@scotch.name%></h3>
-<h3>Rating: <%=@scotch.rating%></h3>
+<h2>Name: <%=@scotch.name%></h2>
 <h3>Price: $<%=@scotch.price%></h3>
-<h3>Review: <%=@scotch.review%></h3>
 
-<form method="POST" action="/reviews/<%=@scotch.slug%>/delete">
+<!--<form method="POST" action="/reviews/<%=@scotch.slug%>/delete">
 	<input type="hidden" name="_method" value="DELETE">
 	<input type="submit" value="Delete Review">
-</form><br>
+</form><br>-->
+<% @review.each do |review| %>
+  <ul>
+    <li><%= review.rating %></li>
+    <li><%= review.description %></li>
+  </ul>
+<% end %><br /><br /><br />
 
-<a href="/reviews/<%=@scotch.slug%>/edit">Edit Review</a>
-<h4><a href="/reviews">Go Back To Reviews</a></h4>
+<!--<a href="/reviews/<%=@scotch.slug%>/edit">Review</a>-->
+<!--<form method="POST" action="/review">
+	<input type="text" name="rating" placeholder="Rate 0-5"><br /><br />
+	<textarea rows="15" cols="50" name="description" placeholder="Review Your Scotch"></textarea><br><br>
+	<input type="submit" value="Create Review">
+</form>-->
+<a href="/review/new">Review</a>
+<h4><a href="/reviews">Go Back To Scotches</a></h4>

@@ -15,8 +15,7 @@ class ConnoisseursController < ApplicationController
 
 	post '/signup' do
 		@connoisseur = Connoisseur.new(:username => params[:username], :email => params[:email], :password => params[:password])
-			if @connoisseur.valid?	#checks validations in model
-				@connoisseur.save	#must use save with Connoisseur.new / Connoisseur.create doesn't need save
+			if @connoisseur.valid? && @connoisseur.save	#checks validations in model
 				session[:id] = @connoisseur.id
 				redirect "/reviews"
 			else
