@@ -1,22 +1,31 @@
-<h2>Name: <%=@scotch.name%></h2>
+<h2><%=@scotch.name%></h2>
 <h3>Price: $<%=@scotch.price%></h3>
-
-<!--<form method="POST" action="/reviews/<%=@scotch.slug%>/delete">
-	<input type="hidden" name="_method" value="DELETE">
-	<input type="submit" value="Delete Review">
-</form><br>-->
+<h3>Reviews:</h3><br />
+<% if flash.has?(:message) %>
+  <h3 style="color: red;"><%= flash[:message] %></h3>
+<% end %>
 <% @review.each do |review| %>
-  <ul>
-    <li><%= review.rating %></li>
-    <li><%= review.description %></li>
-  </ul>
-<% end %><br /><br /><br />
+  <div>
+		<h3><%=review.connoisseur.username%> Says:</h3>
+    <p>Rating: <%=review.rating%></p>
+    <p><a href="/review/<%=review.scotch.slug%>/edit">Review:</a> <%=review.description%></p>
+		<form method="POST" action="/review/<%=review.id%>/delete">
+			<input type="hidden" name="_method" value="DELETE" />
+      <input type="hidden" name="scotch_id" value="<%=review.scotch.slug%>" />
+			<input type="submit" value="Delete Review" />
+		</form>
+  </div><br />
+<% end %>
 
-<!--<a href="/reviews/<%=@scotch.slug%>/edit">Review</a>-->
-<!--<form method="POST" action="/review">
-	<input type="text" name="rating" placeholder="Rate 0-5"><br /><br />
-	<textarea rows="15" cols="50" name="description" placeholder="Review Your Scotch"></textarea><br><br>
+<h3>Create A Review:</h3>
+<form method="POST" action="/review">
+	<input type="text" name="rating" placeholder="Rate 0-5" required><br><br>
+	<textarea rows="15" cols="50" name="description" placeholder="Review <%= @scotch.name %>" required></textarea><br><br>
+	<input type="hidden" name="scotch_id" value="<%= @scotch.id %>">
+	<input type="hidden" name="connoisseur_id" value="<%= session[:id] %>">
 	<input type="submit" value="Create Review">
-</form>-->
-<a href="/review/new">Review</a>
+</form>
+<!--<a href="/reviews/<%=@scotch.slug%>/edit">Review</a>-->
+
+<!--<a href="/review/new">Review</a>-->
 <h4><a href="/reviews">Go Back To Scotches</a></h4>

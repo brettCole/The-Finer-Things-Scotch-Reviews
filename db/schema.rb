@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 20161219212726) do
   create_table "scotches", force: :cascade do |t|
     t.string  "name"
     t.string  "price"
-    t.integer "connoisseurs_id"
+    t.integer "connoisseur_id"
   end
 
 end

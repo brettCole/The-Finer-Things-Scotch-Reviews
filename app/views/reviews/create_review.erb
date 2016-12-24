@@ -1,0 +1,10 @@
+<h1><%= @connoisseur.username %>'s Review of <%=@scotch.name%></h1>
+<%if flash.has?(:error)%>
+	<h3 style="color: red;"><%= flash[:error] %></h3>
+<%end%>
+<form method="POST" action="/review">
+	<input type="text" name="rating" placeholder="Rate 0-5"><br /><br />
+	<textarea rows="15" cols="50" name="description" placeholder="Review Your Scotch"></textarea><br><br>
+	<input type="submit" value="Post Review">
+</form>
+<h4><a href="/reviews/<%=@scotch.slug%>">Go Back To Scotch</a></h4>

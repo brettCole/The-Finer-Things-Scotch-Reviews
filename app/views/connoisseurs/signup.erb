@@ -1,7 +1,7 @@
-<h1>SignUp To Post Your Review</h1>
+<h1>SignUp To Post Your Reviews</h1>
 <% if flash.has?(:error) %>
 	<h3 style="color: red;"><%= flash[:error] %></h3>
-<%end%>
+<% end %>
 <form method="POST" action="/signup">
 	<input type="text" name="username" placeholder="Username" required>
 	<input type="text" name="email" placeholder="Email" required>

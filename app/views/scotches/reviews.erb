@@ -1,9 +1,6 @@
 <h1>Scotches for Review</h1>
-<h4><a href="/reviews/new" style="text-decoration: none;">Add Scotch</a></h4>
-<!--<h3><a href="/reviews/new" style="text-decoration: none;">Write A Review</a></h3>-->
-<!--<% if flash.has?(:error) %>
-	<h3><%= flash[:error] %></h3>
-<%end%>-->
+<h4><a href="/reviews/new" style="text-decoration: none;">Add Scotch For Review</a></h4>
+
 <% @scotch.each do |scotch| %>
 <!--alternative shorthand is scotch.name.split.map(&:capitalize).join(' ') -->
 	<p><a href="/reviews/<%=scotch.slug%>" style="text-decoration: none;"><%= scotch.name.split.map { |i| i.capitalize }.join(' ') %></a></p>

@@ -1,13 +1,12 @@
 <h1>Welcome <%= @connoisseur.username %></h1>
-<%if flash.has?(:error)%>
+<% if flash.has?(:error) %>
 	<h3 style="color: red;"><%= flash[:error] %></h3>
-<%end%>
-<h3>Create A New Review</h3>
+<% end %>
+<h3>Create A New Scotch For List</h3>
 <form method="POST" action="/reviews">
 	<input type="text" name="name" placeholder="Name of Scotch">
-	<!--<input type="text" name="rating" placeholder="Rate 0-5">-->
 	<input type="number" name="price" placeholder="Price"><br><br>
-	<!--<textarea rows="15" cols="50" name="description" placeholder="Review Your Scotch"></textarea><br><br>-->
+	<input type="hidden" name="connoisseur_id" value="<%= session[:id] %>">
 	<input type="submit" value="Post Scotch">
 </form>
-<h4><a href="/reviews">Go Back To Reviews</a></h4>
+<h4><a href="/reviews">Go Back To Scotches</a></h4>

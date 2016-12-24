@@ -5,7 +5,7 @@ class ScotchesController < ApplicationController
 	use Rack::Flash
 
 	get '/reviews' do
-		@title = "Reviews"	#Tab Tile for Page
+		@title = "Reviews"
 		if logged_in?
 			@scotch = Scotch.all
 			@connoisseur = Connoisseur.find(session[:id])
@@ -16,7 +16,7 @@ class ScotchesController < ApplicationController
 	end
 
 	get '/reviews/new' do
-		@title = "Create Review"	#Tab Title for Page
+		@title = "Create Review"
 		if logged_in?
 			@connoisseur = Connoisseur.find(session[:id])
 			erb :'/scotches/create_review'
@@ -28,20 +28,19 @@ class ScotchesController < ApplicationController
 	post '/reviews' do
 		@scotch = Scotch.new(params)
 		if !@scotch.valid?
-			flash[:error] = "Must fill in all fields to complete review!"
-			redirect '/reviews/new'
+			flash[:error] = "Must fill in all fields to create scotch!"
+			redirect "/reviews/new"
 		else
 			@scotch.save
-			redirect "/scotches/reviews"
+			redirect "/reviews"
 		end
 	end
 
 	get "/reviews/:slug" do
-		@title = "Review"	#Tab Title for Page
+		@title = "Review"
 		@scotch = Scotch.find_by_slug(params[:slug])
-		#@connoisseur = Connoisseur.find(session[:id])
-		#Testing
-		@review = Review.all
+		@connoisseur = Connoisseur.find(session[:id])
+		@review = @scotch.reviews.all
 		if logged_in?
 			erb :"/scotches/show_review"
 		else
@@ -49,27 +48,13 @@ class ScotchesController < ApplicationController
 		end
 	end
 
-	#Testing post
-	post "/reviews/:slug" do
-		@review = Review.new(params)
-		if !@review.valid?
-			flash[:error] = "Must fill in all fields to complete review!"
-			erb :"/reviews/<%=@scotch.slug%>"
-		else
-			@review.save
-			erb :"/reviews/<%=@scotch.slug%>"
-		end
-		#save review and redirect to show with reviews and also create message for invalid entry
-	end
-	#Testing Above
-
 	get "/reviews/:slug/edit" do
-		@title = "Edit Review"	#Tab Title for Page
+		@title = "Edit Review"
 		@scotch = Scotch.find_by_slug(params[:slug])
 		if logged_in?
-			if @scotch.connoisseurs_id == session[:id]
+			if @scotch.connoisseur_id == session[:id]
 				erb :"/scotches/edit_review"
-			elsif @scotch.connoisseurs_id != session[:id]
+			elsif @scotch.connoisseur_id != session[:id]
 				flash.now[:error] = "You do not have write privileges to this review! Head back to reviews"
 				erb :"/scotches/edit_review"
 			else
@@ -112,7 +97,7 @@ class ScotchesController < ApplicationController
 	delete "/reviews/:slug/delete" do
 		if logged_in?
 			@scotch = Scotch.find_by_slug(params[:slug])
-			if @scotch.connoisseurs_id == session[:id]
+			if @scotch.connoisseur_id == session[:id]
 				@scotch.delete
 				redirect '/reviews'
 			else
