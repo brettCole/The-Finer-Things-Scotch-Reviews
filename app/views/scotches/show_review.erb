@@ -8,7 +8,7 @@
   <div>
 		<h3><%=review.connoisseur.username%> Says:</h3>
     <p>Rating: <%=review.rating%></p>
-    <p><a href="/review/<%=review.scotch.slug%>/edit">Review:</a> <%=review.description%></p>
+    <p><a href="/review/<%=review.scotch.slug%>/edit?reviews_id=<%=review.id%>">Review:</a> <%=review.description%></p>
 		<form method="POST" action="/review/<%=review.id%>/delete">
 			<input type="hidden" name="_method" value="DELETE" />
       <input type="hidden" name="scotch_id" value="<%=review.scotch.slug%>" />
@@ -25,7 +25,6 @@
 	<input type="hidden" name="connoisseur_id" value="<%= session[:id] %>">
 	<input type="submit" value="Create Review">
 </form>
-<!--<a href="/reviews/<%=@scotch.slug%>/edit">Review</a>-->
 
-<!--<a href="/review/new">Review</a>-->
 <h4><a href="/reviews">Go Back To Scotches</a></h4>
+<%=params.inspect%>
