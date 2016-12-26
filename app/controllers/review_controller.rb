@@ -7,9 +7,7 @@ class ReviewsController < ApplicationController
   post '/review' do #Create new review of scotch
     if logged_in?
       @review = current_user.reviews.new(params)
-      #@scotch = current_user.scotches.find_by(params[:id])
       if @review.valid? && @review.save
-        #redirect back
         redirect "/reviews/#{@review.scotch.slug}"
       else
         flash[:error] = "Must fill in all fields to complete review!"
@@ -47,9 +45,7 @@ class ReviewsController < ApplicationController
         @reviewers.rating = params[:rating]
         @reviewers.description = params[:description]
         @reviewers.save
-        #@review.update_attributes(params)
         redirect "/reviews/#{@reviewers.scotch.slug}"
-        #redirect "/reviews/#{@review.scotch.slug}"
       elsif @reviewers.connoisseur_id != session[:id]
         flash.now[:error] = "You do not have write privileges to this review! Head back to reviews!"
         redirect "/reviews"
