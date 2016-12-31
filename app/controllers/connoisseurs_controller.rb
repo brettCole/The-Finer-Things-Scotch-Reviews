@@ -7,7 +7,7 @@ class ConnoisseursController < ApplicationController
 	get '/signup' do
 		@title = "Signup"
 		if logged_in?
-			redirect "/reviews"
+			redirect "/scotches"
 		else
 			erb :"/connoisseurs/signup"
 		end
@@ -17,7 +17,7 @@ class ConnoisseursController < ApplicationController
 		@connoisseur = Connoisseur.new(params)
 			if @connoisseur.valid? && @connoisseur.save
 				session[:id] = @connoisseur.id
-				redirect "/reviews"
+				redirect "/scotches"
 			else
 				flash[:error] = "Already a connoisseur! Please log in!"
 				redirect "/signup"
@@ -27,7 +27,7 @@ class ConnoisseursController < ApplicationController
 	get '/login' do
 		@title = "Login"
 		if !!session[:id]
-			redirect "/reviews"
+			redirect "/scotches"
 		else
 			erb :"/connoisseurs/login"
 		end
@@ -37,7 +37,7 @@ class ConnoisseursController < ApplicationController
 		@connoisseur = Connoisseur.find_by(username: params[:username])
 		if @connoisseur && @connoisseur.authenticate(params[:password])
 			session[:id] = @connoisseur.id
-			redirect'/reviews'
+			redirect'/scotches'
 		else
 			flash[:error] = "Username or Password Do Not Match!"
 			redirect '/login'

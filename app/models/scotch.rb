@@ -4,11 +4,15 @@ class Scotch < ActiveRecord::Base
 	has_many :reviews
 
 	def slug
-		name.downcase.gsub(" ","-")
+		self.name.downcase.gsub(" ","-")
 	end
 
 	def self.find_by_slug(slug)
 		Scotch.all.find { |scotch| scotch.slug == slug }
+	end
+
+	def is_reviewable?(connoisseur)
+		!self.reviews.any? { |review| review.connoisseur == connoisseur }
 	end
 
 end

@@ -7,5 +7,4 @@ end
 use Rack::MethodOverride
 use ConnoisseursController
 use ScotchesController
-use ReviewsController
 run ApplicationController

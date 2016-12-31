@@ -1,29 +1,29 @@
-<h2><%=@scotch.name%></h2>
-<h3>Price: $<%=@scotch.price%></h3>
+<h2><%= @scotch.name %></h2>
+<h3>Price: $<%= @scotch.price %></h3>
 <h3>Reviews:</h3><br />
 <% if flash.has?(:message) %>
   <h3 style="color: red;"><%= flash[:message] %></h3>
 <% end %>
-<% @review.each do |review| %>
+<% @scotch.reviews.each do |review| %>
   <div>
-		<h3><%=review.connoisseur.username%> Says:</h3>
-    <p>Rating: <%=review.rating%></p>
-    <p><a href="/review/<%=review.scotch.slug%>/edit?reviews_id=<%=review.id%>">Review:</a> <%=review.description%></p>
-		<form method="POST" action="/review/<%=review.id%>/delete">
+		<h3><%= review.connoisseur.username %> Says:</h3>
+    <p>Rating: <%= review.rating %></p>
+    <p><a href="/scotches/<%= review.scotch.slug %>/reviews/<%= review.id %>/edit">Review:</a> <%=review.description%></p>
+		<form method="POST" action="/scotches/<%= review.id %>/delete">
 			<input type="hidden" name="_method" value="DELETE" />
-      <input type="hidden" name="scotch_id" value="<%=review.scotch.slug%>" />
+      <input type="hidden" name="scotch_id" value="<%= review.scotch.slug %>" />
 			<input type="submit" value="Delete Review" />
 		</form>
   </div><br />
 <% end %>
 
-<h3>Create A Review:</h3>
-<form method="POST" action="/review">
-	<input type="text" name="rating" placeholder="Rate 0-5" required><br><br>
-	<textarea rows="15" cols="50" name="description" placeholder="Review <%= @scotch.name %>" required></textarea><br><br>
-	<input type="hidden" name="scotch_id" value="<%= @scotch.id %>">
-	<input type="hidden" name="connoisseur_id" value="<%= session[:id] %>">
-	<input type="submit" value="Create Review">
-</form>
+<% if @scotch.is_reviewable?(current_connoisseur) %>
+  <h3>Create A Review:</h3>
+  <form method="POST" action="/scotches/<%= @scotch.slug %>/reviews">
+  	<input type="text" name="rating" placeholder="Rate 0-5" required><br><br>
+  	<textarea rows="15" cols="50" name="description" placeholder="Review <%= @scotch.name %>" required></textarea><br><br>
+  	<input type="submit" value="Create Review">
+  </form>
+<% end %>
 
-<h4><a href="/reviews">Go Back To Scotches</a></h4>
+<h4><a href="/scotches">Go Back To Scotches</a></h4>

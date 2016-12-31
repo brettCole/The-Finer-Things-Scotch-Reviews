@@ -1,0 +1,6 @@
+<form method="POST" action="/scotches/<%= @scotch.slug %>/reviews/<%= @review.id %>/edit">
+	<input id="hidden" type="hidden" name="_method" value="PATCH">
+	<input type="text" name="rating" placeholder="<%= @review.rating%> "><br /><br />
+	<textarea rows="15" cols="50" name="description" placeholder="<%= @review.description %>"></textarea><br><br>
+	<input type="submit" value="Update">
+</form>

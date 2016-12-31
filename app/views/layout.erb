@@ -5,6 +5,11 @@
 	<title><%= @title %></title>
 </head>
 <body>
+	<% if flash.has?(:error) %>
+		<h3 style="color: red;"><%= flash[:error] %></h3>
+	<% elsif flash.has?(:notice) %>
+		<h3 style="color: orange;"><%= flash[:notice] %></h3>
+	<% end %>
 	<%= yield %>
 </body>
 </html>

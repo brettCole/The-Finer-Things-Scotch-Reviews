@@ -12,6 +12,7 @@ gem 'sqlite3'
 gem 'thin'
 gem 'bcrypt-ruby'
 gem 'rack-flash3'
+gem 'tux'
 
 group :test do
   gem 'rspec'

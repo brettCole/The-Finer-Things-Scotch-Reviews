@@ -1,9 +1,9 @@
 <h1>Scotches for Review</h1>
-<h4><a href="/reviews/new" style="text-decoration: none;">Add Scotch For Review</a></h4>
+<h4><a href="/scotches/new" style="text-decoration: none;">Add Scotch For Review</a></h4>
 
 <% @scotch.each do |scotch| %>
 <!--alternative shorthand is scotch.name.split.map(&:capitalize).join(' ') -->
-	<p><a href="/reviews/<%=scotch.slug%>" style="text-decoration: none;"><%= scotch.name.split.map { |i| i.capitalize }.join(' ') %></a></p>
+	<p><a href="/scotches/<%=scotch.slug%>" style="text-decoration: none;"><%= scotch.name.split.map { |i| i.capitalize }.join(' ') %></a></p>
 <% end %>
 
 <h3><a href="/logout" style="text-decoration: none;">Log Out</a></h3>
